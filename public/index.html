@@ -18,26 +18,25 @@
     <link
       rel="preload"
       as="script"
-      href="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    />
-    <link
-      rel="preload"
-      as="script"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
     />
     <link rel="preload" as="script" href="/assets/app.js" />
     <link
       rel="preload"
       as="style"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
     />
     <link rel="preload" as="style" href="/assets/style.css" />
 
     <!-- Bootstrap -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
     <!-- Custom -->
@@ -51,8 +50,8 @@
         <button
           class="navbar-toggler"
           type="button"
-          data-toggle="collapse"
-          data-target="#nav"
+          data-bs-toggle="collapse"
+          data-bs-target="#nav"
           aria-controls="nav"
           aria-expanded="false"
           aria-label="Toggle navigation"
@@ -108,6 +107,24 @@
                       required
                     />
                   </div>
+                  <div class="form-group">
+                    <label for="ethanolPercent">
+                      Percentual de etanol na gasolina (%)
+                    </label>
+                    <input
+                      type="number"
+                      step="1"
+                      min="0"
+                      max="100"
+                      class="form-control"
+                      id="ethanolPercent"
+                      value="32"
+                      required
+                    />
+                    <small class="form-text text-body-secondary">
+                      Etanol anidro misturado à gasolina (padrão: 32%).
+                    </small>
+                  </div>
                 </div>
                 <div class="card-footer">
                   <input
@@ -132,14 +149,18 @@
             <br />
 
             <p>
-              Na vigente data o litro de gasolina contém 27% de álcool anidro,
-              portanto a formula a seguir assume que a gasolina é 30% mais
-              eficiente que o etanol.
+              No formulário você pode informar o percentual de etanol anidro
+              presente na gasolina (por padrão, 32%). Quanto maior esse
+              percentual, menor a eficiência energética da gasolina e mais
+              vantajoso se torna o etanol.
             </p>
             <p>
-              O resultado da divisão do valor da gasolina pelo valor do etanol,
-              sendo menor ou igual à 0.70 é mais vantajoso abastecer com etanol,
-              se não é mais vantajoso abastecer com gasolina.
+              O cálculo parte do limite clássico de 0,70 (usado quando a
+              gasolina não contém etanol) e o ajusta conforme o percentual
+              informado: com 32% de etanol, o limite passa a ser
+              aproximadamente 0,77. Se a divisão do preço do etanol pelo preço
+              da gasolina for menor ou igual a esse limite, é mais vantajoso
+              abastecer com etanol; caso contrário, com gasolina.
             </p>
 
             <br />
@@ -149,7 +170,7 @@
             <h2>Licença</h2>
             <br />
 
-            <p>Copyright (C) 2019-2020 Sepbit</p>
+            <p>Copyright (C) 2019-2026 Sepbit</p>
             <p>
               Este programa vem com ABSOLUTAMENTE SEM NENHUMA GARANTIA. Este é
               um software livre e você pode redistribuí-lo sob certas condições,
@@ -167,23 +188,8 @@
               <table class="table table-striped" id="jslicense-labels1">
                 <tr>
                   <td>
-                    <a href="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                      >jquery-3.5.1.slim.min.js</a
-                    >
-                  </td>
-                  <td>
-                    <a href="http://www.jclark.com/xml/copying.txt">Expat</a>
-                  </td>
-                  <td>
-                    <a href="https://code.jquery.com/jquery-3.5.1.slim.js"
-                      >jquery-3.5.1.slim.js</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
                     <a
-                      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+                      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
                       >bootstrap.bundle.min.js</a
                     >
                   </td>
@@ -192,7 +198,7 @@
                   </td>
                   <td>
                     <a
-                      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.js"
+                      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.js"
                       >bootstrap.bundle.js</a
                     >
                   </td>
@@ -270,21 +276,13 @@
         class="modal fade"
         tabindex="-1"
         role="dialog"
-        data-backdrop="static"
+        data-bs-backdrop="static"
         id="loading"
       >
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header bg-primary text-white">
               <h5 class="modal-title">Calculando...</h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
             <div class="modal-body">
               <br />
@@ -314,14 +312,6 @@
           <div class="modal-content">
             <div class="modal-header bg-primary text-white">
               <h5 class="modal-title">Resultado</h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
             <div class="modal-body">
               <br />
@@ -351,7 +341,7 @@
               >
               |
               <a href="/#/about">Política de privacidade</a>
-              <br />&copy; 2011-2021
+              <br />&copy; 2019-2026
               <a href="https://sepbit.com" target="_blank" rel="noopener"
                 >Sepbit</a
               >
@@ -361,15 +351,10 @@
       </div>
     </footer>
 
-    <!-- jQuery and Bootstrap-->
+    <!-- Bootstrap -->
     <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
     <!-- App -->

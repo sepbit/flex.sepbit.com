@@ -22,8 +22,6 @@
  * @licend  The above is the entire license notice
  * for the JavaScript code in this page.
  */
-/* global $ */
-
 const app = {
   init: function () {
     window.addEventListener('hashchange', this.router)
@@ -51,10 +49,27 @@ const app = {
 
   toggler: function () {
     if (window.innerWidth < 992) {
-      $('.navbar-nav a').on('click', function () {
-        $('.navbar-toggler').click()
+      document.querySelectorAll('.navbar-nav a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          document.querySelector('.navbar-toggler').click()
+        })
       })
     }
+  },
+
+  // Calcula o limite de preço (razão etanol/gasolina) a partir do qual o
+  // etanol compensa, considerando o percentual de etanol anidro na gasolina.
+  ethanolLimit: function (percent) {
+    if (isNaN(percent)) percent = 32
+    percent = Math.min(100, Math.max(0, percent))
+    // Eficiência da gasolina pura em relação ao etanol puro (etanol = 1).
+    // O limite clássico de 0,70 equivale a 1 / 0,70.
+    const gasolineEfficiency = 1 / 0.7
+    // Eficiência da mistura: a fração de etanol tem eficiência 1 e a fração
+    // restante de gasolina pura tem eficiência gasolineEfficiency.
+    const blendEfficiency =
+      percent / 100 + ((100 - percent) / 100) * gasolineEfficiency
+    return 1 / blendEfficiency
   },
 
   form: function () {
@@ -62,15 +77,21 @@ const app = {
     calculator.addEventListener('submit', function (e) {
       e.preventDefault()
 
-      $('#loading').modal('toggle')
+      bootstrap.Modal.getOrCreateInstance(
+        document.getElementById('loading')
+      ).toggle()
 
       const result = document.getElementById('resultMsg')
       const ethanol = document.getElementById('ethanol').value
       const gasoline = document.getElementById('gasoline').value
+      const ethanolPercent = Number(
+        document.getElementById('ethanolPercent').value
+      )
       const division = Number(ethanol) / Number(gasoline)
+      const limit = app.ethanolLimit(ethanolPercent)
 
       setTimeout(function () {
-        if (division <= 0.7) {
+        if (division <= limit) {
           result.innerHTML = '<p>É mais vantajoso abastecer com</p>' +
             '<h1 class="text-primary">Etanol</h1>'
         } else {
@@ -78,8 +99,12 @@ const app = {
             '<h1 class="text-primary">Gasolina</h1>'
         }
 
-        $('#loading').modal('toggle')
-        $('#resultModal').modal('toggle')
+        bootstrap.Modal.getOrCreateInstance(
+          document.getElementById('loading')
+        ).toggle()
+        bootstrap.Modal.getOrCreateInstance(
+          document.getElementById('resultModal')
+        ).toggle()
       }, 1000)
     })
   }
