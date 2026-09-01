@@ -24,11 +24,11 @@ self.addEventListener('install', function (e) {
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (cacheName.indexOf(key) === -1) {
-          return caches.delete(key)
-        }
-      }))
+      return Promise.all(
+        keyList
+          .filter((key) => cacheName.indexOf(key) === -1)
+          .map((key) => caches.delete(key))
+      )
     })
   )
 })

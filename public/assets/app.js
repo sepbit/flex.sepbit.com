@@ -22,6 +22,7 @@
  * @licend  The above is the entire license notice
  * for the JavaScript code in this page.
  */
+/* global bootstrap */
 const app = {
   init: function () {
     window.addEventListener('hashchange', this.router)
