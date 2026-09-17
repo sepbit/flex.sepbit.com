@@ -1,12 +1,14 @@
 /* global caches, fetch, self */
 
-const cacheName = 'flex-v24'
+const cacheName = 'flex-v26'
 const contentToCache = [
   '/',
   '/index.html',
-  '/assets/style.css?v=20260917',
-  '/assets/images/512.png?v=20260917',
-  '/assets/app.js?v=20260917',
+  '/manifest.webmanifest?v=20260917.1',
+  '/ws.js?v=20260917.1',
+  '/assets/style.css?v=20260917.1',
+  '/assets/images/512.png?v=20260917.1',
+  '/assets/app.js?v=20260917.1',
   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js',
   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css'
 ]
@@ -43,6 +45,9 @@ self.addEventListener('fetch', function (e) {
           cache.put(e.request, response.clone())
           return response
         })
+      }).catch(function (error) {
+        if (e.request.mode === 'navigate') return caches.match('/')
+        throw error
       })
     })
   )

@@ -4,13 +4,32 @@
   "description": "Descubra qual combustível é mais vantajoso, etanol ou gasolina",
   "id": "/",
   "start_url": "/",
+  "scope": "/",
+  "lang": "pt-BR",
+  "dir": "ltr",
   "display": "standalone",
   "orientation": "any",
+  "categories": ["finance", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Nova comparação",
+      "short_name": "Comparar",
+      "url": "/?v=20260917.1"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.sepbit.flex",
+      "id": "com.sepbit.flex"
+    }
+  ],
+  "prefer_related_applications": false,
   "theme_color": "#007bff",
   "background_color": "#007bff",
   "icons": [
     {
-      "src": "/assets/images/512.png?v=20260917",
+      "src": "/assets/images/512.png?v=20260917.1",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
