@@ -27,7 +27,6 @@ const app = {
   init: function () {
     window.addEventListener('hashchange', this.router)
     window.addEventListener('load', this.router)
-    this.toggler()
     this.form()
   },
 
@@ -45,16 +44,6 @@ const app = {
       about.style.display = 'none'
       document.body.scrollTop = 0
       document.documentElement.scrollTop = 0
-    }
-  },
-
-  toggler: function () {
-    if (window.innerWidth < 992) {
-      document.querySelectorAll('.navbar-nav a').forEach(function (link) {
-        link.addEventListener('click', function () {
-          document.querySelector('.navbar-toggler').click()
-        })
-      })
     }
   },
 
@@ -93,19 +82,18 @@ const app = {
 
       setTimeout(function () {
         if (division <= limit) {
-          result.innerHTML = '<p>É mais vantajoso abastecer com</p>' +
-            '<h1 class="text-primary">Etanol</h1>'
+          result.innerHTML = '<p class="result-card__label">Melhor opção</p>' +
+            '<h2>Etanol</h2>'
         } else {
-          result.innerHTML = '<p>É mais vantajoso abastecer com</p>' +
-            '<h1 class="text-primary">Gasolina</h1>'
+          result.innerHTML = '<p class="result-card__label">Melhor opção</p>' +
+            '<h2>Gasolina</h2>'
         }
+        result.hidden = false
 
         bootstrap.Modal.getOrCreateInstance(
           document.getElementById('loading')
         ).toggle()
-        bootstrap.Modal.getOrCreateInstance(
-          document.getElementById('resultModal')
-        ).toggle()
+        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
       }, 1000)
     })
   }

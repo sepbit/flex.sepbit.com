@@ -45,30 +45,12 @@
   <body>
     <noscript>Por favor habilite o JavaScript em seu navegador!</noscript>
 
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
-      <div class="container">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#nav"
-          aria-controls="nav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#">Calculadora Flex</a>
-        <div class="collapse navbar-collapse justify-content-end" id="nav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Início</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/#/about">Sobre</a>
-            </li>
-          </ul>
-        </div>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark app-bar">
+      <div class="container app-bar__inner">
+        <a class="navbar-brand" href="#">
+          <span class="brand-mark" aria-hidden="true">F</span>
+          <span>Calculadora Flex</span>
+        </a>
       </div>
       <!-- container -->
     </nav>
@@ -80,34 +62,39 @@
       <main class="container" id="home">
         <div class="row">
           <div class="offset-md-3 col-md-6">
+            <header class="app-intro">
+              <span class="eyebrow">Abastecimento inteligente</span>
+              <h1>Qual combustível compensa hoje?</h1>
+              <p>Compare os preços e escolha a opção mais econômica para o seu carro.</p>
+            </header>
             <form id="calculator">
-              <div class="card">
+              <div class="card calculator-card">
                 <div class="card-body">
-                  <div class="form-group">
+                  <div class="form-group field-group">
                     <label for="ethanol">Etanol (R$)</label>
                     <input
                       type="number"
                       step="0.01"
                       min="0"
-                      class="form-control"
+                      class="form-control form-control-lg"
                       id="ethanol"
                       placeholder="5.40"
                       required
                     />
                   </div>
-                  <div class="form-group">
+                  <div class="form-group field-group">
                     <label for="gasoline">Gasolina (R$)</label>
                     <input
                       type="number"
                       step="0.01"
                       min="0"
-                      class="form-control"
+                      class="form-control form-control-lg"
                       id="gasoline"
                       placeholder="6.90"
                       required
                     />
                   </div>
-                  <div class="form-group">
+                  <div class="form-group field-group mb-0">
                     <label for="ethanolPercent">
                       Percentual de etanol na gasolina (%)
                     </label>
@@ -116,7 +103,7 @@
                       step="1"
                       min="0"
                       max="100"
-                      class="form-control"
+                      class="form-control form-control-lg"
                       id="ethanolPercent"
                       value="32"
                       required
@@ -126,15 +113,16 @@
                     </small>
                   </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer calculator-card__footer">
                   <input
-                    class="btn btn-primary"
+                    class="btn btn-primary btn-lg w-100"
                     type="submit"
                     value="Calcular"
                   />
                 </div>
               </div>
             </form>
+            <section class="result-card" id="resultMsg" aria-live="polite" hidden></section>
           </div>
         </div>
       </main>
@@ -142,50 +130,51 @@
       <!--
         About page
       -->
-      <main class="container" style="display: none" id="about">
+      <main class="container about-page" style="display: none" id="about">
         <div class="row">
           <div class="offset-md-2 col-md-8">
-            <h1>Sobre</h1>
-            <br />
+            <header class="app-intro about-page__intro">
+              <span class="eyebrow">Sobre o aplicativo</span>
+              <h1>Calculadora Flex</h1>
+              <p>Uma comparação rápida para ajudar na escolha entre etanol e gasolina.</p>
+            </header>
 
-            <p>
-              No formulário você pode informar o percentual de etanol anidro
-              presente na gasolina (por padrão, 32%). Quanto maior esse
-              percentual, menor a eficiência energética da gasolina e mais
-              vantajoso se torna o etanol.
-            </p>
-            <p>
-              O cálculo parte do limite clássico de 0,70 (usado quando a
-              gasolina não contém etanol) e o ajusta conforme o percentual
-              informado: com 32% de etanol, o limite passa a ser aproximadamente
-              0,77. Se a divisão do preço do etanol pelo preço da gasolina for
-              menor ou igual a esse limite, é mais vantajoso abastecer com
-              etanol; caso contrário, com gasolina.
-            </p>
+            <div class="about-content">
+              <section>
+                <h2>Como funciona</h2>
+                <p>
+                  Informe o preço por litro do etanol e da gasolina. Você também
+                  pode ajustar o percentual de etanol anidro presente na gasolina;
+                  o padrão usado pelo aplicativo é 32%.
+                </p>
+                <p>
+                  A calculadora compara a razão entre os dois preços com um limite
+                  de referência. Sem etanol misturado, esse limite é 0,70. Com
+                  32% de etanol, ele fica em aproximadamente 0,77. Se a razão
+                  entre o preço do etanol e o da gasolina for menor ou igual ao
+                  limite, o etanol é indicado; caso contrário, a indicação é a
+                  gasolina.
+                </p>
+              </section>
 
-            <br />
-            <hr />
-            <br />
+              <hr />
 
-            <h2>Licença</h2>
-            <br />
+              <section>
+                <h2>Licença</h2>
+                <p>Copyright (C) 2019-2026 Sepbit.</p>
+                <p>
+                  Este programa é software livre, distribuído sob a licença
+                  GNU GPL, sem nenhuma garantia. Consulte os créditos abaixo
+                  para conhecer as licenças dos componentes utilizados.
+                </p>
 
-            <p>Copyright (C) 2019-2026 Sepbit</p>
-            <p>
-              Este programa vem com ABSOLUTAMENTE SEM NENHUMA GARANTIA. Este é
-              um software livre e você pode redistribuí-lo sob certas condições,
-              veja as licenças abaixo.
-            </p>
+                <h3>Licenças do JavaScript</h3>
 
-            <br />
-            <h3>Licenças do JavaScript</h3>
-            <br />
-
-            <!--
-              LibreJS
-            -->
-            <div class="table-responsive">
-              <table class="table table-striped" id="jslicense-labels1">
+                <!--
+                  LibreJS
+                -->
+                <div class="table-responsive">
+                  <table class="table table-striped" id="jslicense-labels1">
                 <tr>
                   <td>
                     <a
@@ -212,57 +201,76 @@
                   </td>
                   <td><a href="/assets/app.js">app.js</a></td>
                 </tr>
-              </table>
-            </div>
+                  </table>
+                </div>
 
-            <br />
-            <h3>Licença da imagem</h3>
-            <br />
+                <h3>Licença da imagem</h3>
+                <div class="image-credit">
+                  <img
+                    src="/assets/images/512.png"
+                    class="img-fluid img-thumbnail rounded"
+                    alt="Ícone do projeto"
+                  />
+                  <p>
+                    O ícone é baseado neste
+                    <a href="/assets/images/gas-297117.svg">trabalho</a> de
+                    <a
+                      href="https://pixabay.com/pt/users/Clker-Free-Vector-Images-3736/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=297117"
+                      >Clker-Free-Vector-Images</a
+                    >, distribuído pelo
+                    <a
+                      href="https://pixabay.com/pt/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=297117"
+                      >Pixabay</a
+                    > e licenciado sob a
+                    <a
+                      href="https://pixabay.com/en/service/license/"
+                      target="_blank"
+                      rel="noopener"
+                      >Pixabay License</a
+                    >.
+                  </p>
+                </div>
+              </section>
 
-            <div class="row">
-              <div class="col-md-4">
-                <img
-                  src="/assets/images/512.png"
-                  class="img-fluid img-thumbnail rounded"
-                  alt="Ícone do projeto"
-                />
-              </div>
-              <div class="col-md-8">
-                <br />
+              <hr />
+
+              <section>
+                <h2>Política de privacidade</h2>
                 <p>
-                  Este trabalho foi baseado no
-                  <a href="/assets/images/gas-297117.svg">trabalho</a> produzido
-                  por
-                  <a
-                    href="https://pixabay.com/pt/users/Clker-Free-Vector-Images-3736/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=297117"
-                    >Clker-Free-Vector-Images</a
-                  >, distribuído por
-                  <a
-                    href="https://pixabay.com/pt/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=297117"
-                    >Pixabay</a
-                  >
-                  e licenciada por
-                  <a
-                    href="https://pixabay.com/en/service/license/"
-                    target="_blank"
-                    rel="noopener"
-                    >Pixabay License</a
-                  >.
+                  <strong>Última atualização: 17 de setembro de 2026.</strong>
                 </p>
+                <p>
+                  A Calculadora Flex foi criada para funcionar sem cadastro e sem
+                  coletar dados pessoais. Os preços e o percentual informados no
+                  formulário são usados somente no seu navegador para realizar o
+                  cálculo. Esses dados não são enviados para um servidor, salvos
+                  em banco de dados ou compartilhados por este aplicativo.
+                </p>
+                <h3>Armazenamento e funcionamento offline</h3>
+                <p>
+                  O aplicativo não usa cookies, armazenamento local, publicidade,
+                  ferramentas de análise ou rastreamento de usuários. O service
+                  worker pode guardar os arquivos necessários para abrir o app e
+                  permitir seu uso offline; ele não guarda os valores preenchidos
+                  no formulário.
+                </p>
+                <h3>Serviços e links externos</h3>
+                <p>
+                  O Bootstrap é carregado pelo serviço jsDelivr. Ao solicitar
+                  esses arquivos, seu navegador pode compartilhar dados técnicos
+                  normalmente enviados em uma conexão web, conforme a política
+                  do provedor. A página também contém links para sites externos;
+                  as políticas desses sites se aplicam quando você os acessa.
+                </p>
+                <h3>Alterações e contato</h3>
+                <p>
+                  Esta política pode ser atualizada para refletir mudanças no
+                  aplicativo ou na legislação. Em caso de dúvidas, entre em
+                  contato pelo e-mail
+                  <a href="mailto:contato@sepbit.com">contato@sepbit.com</a>.
+                </p>
+              </section>
               </div>
-            </div>
-
-            <br />
-            <hr />
-            <br />
-
-            <h2>Política de privacidade</h2>
-            <br />
-
-            <p>
-              Este aplicativo não armazena qualquer dado dos usuários e nem os
-              fornece a terceiros.
-            </p>
           </div>
         </div>
       </main>
@@ -279,13 +287,12 @@
         data-bs-backdrop="static"
         id="loading"
       >
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
+            <div class="modal-header loading-header">
               <h5 class="modal-title">Calculando...</h5>
             </div>
             <div class="modal-body">
-              <br />
               <div class="progress">
                 <div
                   class="progress-bar progress-bar-striped progress-bar-animated"
@@ -296,25 +303,6 @@
                   style="width: 75%"
                 ></div>
               </div>
-              <br />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!--
-        Alert result
-      -->
-      <div class="modal fade" tabindex="-1" role="dialog" id="resultModal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-              <h5 class="modal-title">Resultado</h5>
-            </div>
-            <div class="modal-body">
-              <br />
-              <div id="resultMsg"></div>
-              <br />
             </div>
           </div>
         </div>
@@ -322,30 +310,19 @@
     </div>
     <!-- Wrapper -->
 
-    <footer class="text-light bg-primary">
+    <footer class="text-light app-footer">
       <div class="container">
-        <div class="row">
-          <div class="offset-md-2 col-md-8">
-            <p>
-              <a
-                href="https://gitlab.com/sepbit/flex"
-                target="_blank"
-                rel="noopener"
-                >Código fonte</a
-              >
-              |
-              <a href="/#/about" rel="jslicense"
-                >Informações de licença JavaScript</a
-              >
-              |
-              <a href="/#/about">Política de privacidade</a>
-              <br />&copy; 2019-2026
-              <a href="https://sepbit.com" target="_blank" rel="noopener"
-                >Sepbit</a
-              >
-            </p>
-          </div>
+        <p class="app-footer__title">Calculadora Flex</p>
+        <div class="app-footer__links">
+          <a href="/#/about">Sobre</a>
+          <a href="/#/about" rel="jslicense">Licenças</a>
+          <a href="/#/about">Política de privacidade</a>
+          <a href="https://github.com/sepbit/flex.sepbit.com" target="_blank" rel="noopener">Código fonte</a>
         </div>
+        <p class="app-footer__copyright">
+          &copy; 2019-2026
+          <a href="https://sepbit.com" target="_blank" rel="noopener">Sepbit</a>
+        </p>
       </div>
     </footer>
 
